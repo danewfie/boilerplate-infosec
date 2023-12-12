@@ -1,6 +1,7 @@
 const express = require('express');
 const helmet = require('helmet');
 const hidePoweredBy = require("hide-powered-by");
+var timeInSeconds = 90*24*60*60;
 
 const app = express();
 app.use(helmet());
@@ -18,7 +19,7 @@ app.use(helmet.noSniff());
 
 app.use(helmet.ieNoOpen());
 
-
+app.use(helmet.hsts({maxAge: timeInSeconds, force: true}));
 
 
 
