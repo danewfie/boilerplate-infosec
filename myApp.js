@@ -11,6 +11,8 @@ app.disable("x-powered-by");
 app.use(hidePoweredBy({ setTo: 'PHP 4.2.0' }));
 // Sets "X-Frame-Options: DENY"
 app.use(helmet.frameguard({action: 'deny'}));
+// sets xssFilter
+app.use(helmet.xssFilter());
 
 
 
