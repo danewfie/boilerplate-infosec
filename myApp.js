@@ -10,11 +10,7 @@ app.disable("x-powered-by");
 // Ask Helmet to ignore the X-Powered-By header.
 app.use(hidePoweredBy({ setTo: 'PHP 4.2.0' }));
 // Sets "X-Frame-Options: DENY"
-app.use(
-  helmet({
-    xFrameOptions: { action: "deny" },
-  })
-);
+app.use(helmet.frameguard({action: 'deny'}));
 
 
 
