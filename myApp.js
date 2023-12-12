@@ -1,20 +1,25 @@
 const express = require('express');
 const helmet = require('helmet');
+const hidePoweredBy = require("hide-powered-by");
+var timeInSeconds = 90*24*60*60;
+
 const app = express();
 app.use(helmet());
 // Not required, but recommended for Express users:
 app.disable("x-powered-by");
 
 // Ask Helmet to ignore the X-Powered-By header.
-app.use(
-  helmet({
-    xPoweredBy: false,
-  })
-);
+app.use(hidePoweredBy({ setTo: 'PHP 4.2.0' }));
+// Sets "X-Frame-Options: DENY"
+app.use(helmet.frameguard({action: 'deny'}));
+// sets xssFilter
+app.use(helmet.xssFilter());
 
+app.use(helmet.noSniff());
 
+app.use(helmet.ieNoOpen());
 
-
+app.use(helmet.hsts({maxAge: timeInSeconds, force: true}));
 
 
 
